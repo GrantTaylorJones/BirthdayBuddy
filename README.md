@@ -17,3 +17,7 @@ Email Service
 - Have not decided on one yet, it looks like Gmail would be a good candidate though.
 
 ![Architecture Image File](resources/images/birthday-buddy-architecture.png)
+
+### Useful links
+
+[Creating azure function app via CLI](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=windows%2Cazure-cli)
