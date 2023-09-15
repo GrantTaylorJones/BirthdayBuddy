@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "birthday_buddy_function_app": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7063",
-      "launchBrowser": false
-    }
-  }
-}
