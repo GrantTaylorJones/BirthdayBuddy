@@ -4,11 +4,12 @@ namespace birthdayBuddyFunctionApp
     public class Birthday
     {
 
-        public IEnumerable<string> PeopleBornOnThisDate { get; set; }
         public DateTime TodaysDate;
-        public Birthday(DateTime TodaysDate, IEnumerable<string> PeopleBornOnThisDate){
-            this.TodaysDate = TodaysDate;
-            this.PeopleBornOnThisDate = PeopleBornOnThisDate;
+        public IEnumerable<string> PeopleBornOnThisDate { get; set; }
+
+        public Birthday(DateTime todaysDate, IEnumerable<string> peopleBornOnThisDate){
+            TodaysDate = todaysDate;
+            PeopleBornOnThisDate = peopleBornOnThisDate;
 
         }
     }

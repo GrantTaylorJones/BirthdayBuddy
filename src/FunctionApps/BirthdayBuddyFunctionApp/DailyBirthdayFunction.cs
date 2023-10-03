@@ -1,22 +1,31 @@
 using System;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using birthdayBuddyFunctionApp;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
 namespace birthday_buddy_functionapp
 {
-    public class daily_birthday_function
+    public class DailyBirthdayFunction
     {
         private readonly ILogger _logger;
 
-        public daily_birthday_function(ILoggerFactory loggerFactory)
+        public DailyBirthdayFunction(ILoggerFactory loggerFactory)
         {
-            _logger = loggerFactory.CreateLogger<daily_birthday_function>();
+            _logger = loggerFactory.CreateLogger<DailyBirthdayFunction>();
         }
 
-        [Function("daily_birthday_function")]
+        [Function("DailyBirthdayFunction")]
         public void Run([TimerTrigger("0 0 3 * * *")] MyInfo myTimer)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+
+            string birthdaysJsonFileAsText = File.ReadAllText(@"resources/local/birthdays.json");
+            var birthdays = JsonSerializer.Deserialize<AllBirthdaysList>(birthdaysJsonFileAsText);
+
+
+
             _logger.LogInformation($"Next timer schedule at: {myTimer.ScheduleStatus.Next}");
         }
     }
