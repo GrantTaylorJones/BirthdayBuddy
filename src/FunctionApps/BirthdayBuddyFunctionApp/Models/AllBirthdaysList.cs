@@ -4,7 +4,7 @@ namespace birthdayBuddyFunctionApp
     {
 
         public IEnumerable<Birthday> Birthdays { get; set; }
-        public Birthday(IEnumerable<Birthday> birthdays){
+        public AllBirthdaysList(IEnumerable<Birthday> birthdays){
             Birthdays = birthdays;
         }
     }
