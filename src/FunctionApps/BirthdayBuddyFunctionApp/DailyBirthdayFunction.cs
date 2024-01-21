@@ -16,14 +16,14 @@ namespace birthday_buddy_functionapp
             _logger = loggerFactory.CreateLogger<DailyBirthdayFunction>();
         }
 
-        //Runs every day at 1 AM PST, expression is NCRONTAB in UTC
+        //Runs every day at 1 AM PST, expression is NCRONTAB, server is in East US
         [Function(nameof(DailyBirthdayFunction))]
-        public void Run([TimerTrigger("0 0 9 * * *")] TimerInfo timerInfo, FunctionContext context)
+        public void Run([TimerTrigger("0 0 4 * * *")] TimerInfo timerInfo, FunctionContext context)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
             //get todays birthdays
-            
+
             _logger.LogInformation($"Next timer schedule at: {timerInfo.ScheduleStatus.Next}");
         
         }
