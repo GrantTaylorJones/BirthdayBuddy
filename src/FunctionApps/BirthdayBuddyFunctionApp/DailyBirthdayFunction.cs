@@ -17,13 +17,18 @@ namespace birthday_buddy_functionapp
         }
 
         //Runs every day at 1 AM PST, expression is NCRONTAB, server is in East US
+
+        //CHANGE BACK TO 0 0 4 * * * WHEN DONE !!!!!!!!!!!!!!!!!!!!!!!//
         [Function(nameof(DailyBirthdayFunction))]
-        public void Run([TimerTrigger("0 0 4 * * *")] TimerInfo timerInfo, FunctionContext context)
+        public void Run([TimerTrigger("0 * * * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdaytest.json")]  BirthdayList birthdayList, FunctionContext context)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            _logger.LogInformation($"Retreived birthday list json file: {birthdayList}");
 
-            //get todays birthdays
-
+            //Date todaysDate = getTodaysDate()
+            //checkBirthdays(todaysDate)
+            //sendBirthdayEmail()
+            
             _logger.LogInformation($"Next timer schedule at: {timerInfo.ScheduleStatus.Next}");
         
         }
