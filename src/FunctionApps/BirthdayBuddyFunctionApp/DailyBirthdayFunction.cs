@@ -26,7 +26,7 @@ namespace birthday_buddy_functionapp
             foreach (Birthday birthday in birthdayList.Birthdays)
                 {
                     foreach (string person in birthday.People){
-                        _logger.LogInformation($"Happy Birthday {person}!");  
+                        _logger.LogInformation($"Happy Birthday to {person}!");  
                     }
                 }
 
