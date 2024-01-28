@@ -33,7 +33,7 @@ namespace birthday_buddy_functionapp
             //Date todaysDate = getTodaysDate()
             //checkBirthdays(todaysDate)
             //sendBirthdayEmail()
-            
+    
             _logger.LogInformation($"Next timer schedule at: {timerInfo.ScheduleStatus.Next}");
         
         }
