@@ -18,31 +18,38 @@ namespace birthday_buddy_functionapp
 
         //Runs every day at 1 AM PST, expression is NCRONTAB, server is in East US
         /// <summary>
-        /// CHANGE BACK TO 0 0 4 * * *"
+        /// TODO
         /// </summary>
         /// <param name="timerInfo"></param>
         /// <param name="birthdayList"></param>
         /// <param name="context"></param>
         [Function(nameof(DailyBirthdayFunction))]
-        public void Run([TimerTrigger("0 * * * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdaytest.json")]  BirthdayList birthdayList, FunctionContext context)
+        public void Run([TimerTrigger("0 0 4 * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")]  BirthdayList birthdayList, FunctionContext context)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
-            _logger.LogInformation($"Retreived birthday list json file: {birthdayList}");
 
-            _logger.LogInformation(DateTime.Now.ToString("MM/dd"));
+            try{
+                if(birthdayList == null) throw new Exception("birthdayList argument is null (blob input)");
 
-            foreach (Birthday birthday in birthdayList.Birthdays)
-                {
-                    foreach (string person in birthday.People){
-                        _logger.LogInformation($"Happy Birthday to {person}!");  
-                    }
+                string todaysDate = DateTime.Now.ToString("MM/dd");
+                Birthday todaysBirthday = GetBirthdays(todaysDate, birthdayList);
+                if(todaysBirthday.People.Count() > 0){
+                    //sendEmailWithTodaysBirthdayNames(todaysBirthdays.People);
                 }
+                
+            }
+            catch(Exception exception){
+                _logger.LogError($"Exception thrown. Error message: '{exception.Message}'");
+            }
 
-            //checkBirthdays(todaysDate)
-            //sendBirthdayEmail()
-    
-            _logger.LogInformation($"Next timer schedule at: {timerInfo.ScheduleStatus.Next}");
-        
+            _logger.LogInformation($"Next timer schedule at: {timerInfo.ScheduleStatus.Next}");        
+        }
+
+        public Birthday GetBirthdays(string dateAsMonthSlashYear, BirthdayList birthdayList){
+            foreach (Birthday birthday in birthdayList.Birthdays){
+                if (birthday.Date == dateAsMonthSlashYear) return birthday;
+            }
+            return new Birthday();
         }
 
     }
