@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.14.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="5.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.66.0.3287" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

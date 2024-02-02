@@ -21,3 +21,10 @@ Email Service
 ### Useful links
 
 [Creating azure function app via CLI](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=windows%2Cazure-cli)
+
+Gmail Link
+[Gmail API Client Library for .NET](https://developers.google.com/api-client-library/dotnet/apis/gmail/v1)
+[]()
+[]()
+[]()
+[]()
