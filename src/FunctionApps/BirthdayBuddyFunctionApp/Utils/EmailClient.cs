@@ -1,8 +1,5 @@
-using System;
 using MailKit.Net.Smtp;
-using MailKit;
 using MimeKit;
-
 
 namespace birthday_buddy_functionapp
 {
@@ -26,39 +23,39 @@ namespace birthday_buddy_functionapp
         public void SendBirthdayAlertEmail()
         {
             if (!this.HasValidFields()) throw new ArgumentException($"Empty or null fields in EmailClient.cs: {this.ToString()}");
-            
-                MimeMessage email = new MimeMessage();
 
-                email.From.Add(new MailboxAddress("Birthday Buddy", SenderEmailAddress));
-                email.To.Add(new MailboxAddress("Birthday Buddy User", RecepientEmailAddress));
+            MimeMessage email = new MimeMessage();
 
-                email.Subject = "You have birthdays today!";
-                email.Body = new TextPart("plain")
-                {
-                    Text = $"Happy birthday to:\n\n{TodaysBirthdays.ToString()}"
-                };
+            email.From.Add(new MailboxAddress("Birthday Buddy", SenderEmailAddress));
+            email.To.Add(new MailboxAddress("Birthday Buddy User", RecepientEmailAddress));
 
-                using (var smtp = new SmtpClient())
-                {
-                    smtp.Connect("smtp.gmail.com", 587, false);
-
-                    // Note: only needed if the SMTP server requires authentication
-                    smtp.Authenticate(SenderEmailAddress, SenderPassword);
-
-                    smtp.Send(email);
-                    smtp.Disconnect(true);
-                }
-            }
-
-            private Boolean HasValidFields()
+            email.Subject = "You have birthdays today!";
+            email.Body = new TextPart("plain")
             {
-                if (
-                    SenderEmailAddress == null || SenderEmailAddress.Equals("") ||
-                    RecepientEmailAddress == null || RecepientEmailAddress.Equals("") ||
-                    SenderPassword == null || SenderPassword.Equals("")
-                ) return false;
-                else return true;
-            }
+                Text = $"Happy birthday to:\n\n{TodaysBirthdays.ToString()}"
+            };
 
+            using (var smtp = new SmtpClient())
+            {
+                smtp.Connect("smtp.gmail.com", 587, false);
+
+                // Note: only needed if the SMTP server requires authentication
+                smtp.Authenticate(SenderEmailAddress, SenderPassword);
+
+                smtp.Send(email);
+                smtp.Disconnect(true);
+            }
         }
+
+        private Boolean HasValidFields()
+        {
+            if (
+                SenderEmailAddress == null || SenderEmailAddress.Equals("") ||
+                RecepientEmailAddress == null || RecepientEmailAddress.Equals("") ||
+                SenderPassword == null || SenderPassword.Equals("")
+            ) return false;
+            else return true;
+        }
+
     }
+}
