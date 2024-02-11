@@ -7,7 +7,7 @@ namespace birthday_buddy_functionapp
         public static Birthday GetTodaysBirthdays(BirthdayList birthdayList)
         {
             string todaysDate = GetTodaysDateAsMMDD();
-            return GetBirthdaysOnDate("02/11", birthdayList);
+            return GetBirthdaysOnDate(todaysDate, birthdayList);
         }
 
         private static string GetTodaysDateAsMMDD()
