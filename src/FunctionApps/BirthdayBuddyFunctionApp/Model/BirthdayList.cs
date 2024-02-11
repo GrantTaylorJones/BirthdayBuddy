@@ -6,7 +6,8 @@ namespace birthday_buddy_functionapp
 
         public BirthdayList()
         {
-            this.Birthdays = Enumerable.Empty<Birthday>();
+            // Default constructor creates empty enumerable, that can be added to
+            Birthdays = Enumerable.Empty<Birthday>();
         }
 
     }

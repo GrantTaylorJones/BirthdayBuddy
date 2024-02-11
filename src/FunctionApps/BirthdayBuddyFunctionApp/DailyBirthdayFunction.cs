@@ -18,11 +18,11 @@ namespace birthday_buddy_functionapp
         /// Defult name is Run, but the method name can be any valid C# method name. 
         /// This function runs every day at 1 AM PST, expression is NCRONTAB, server is in East US Time, hence 4 as the hour.
         /// </summary>
-        /// <param name="timerInfo"></param>
-        /// <param name="birthdayList"></param>
-        /// <param name="context"></param>
+        /// <param name="timerInfo">Azure Default Param - Contains scheduling information</param>
+        /// <param name="birthdayList"> Maps the JSON input to a BirthdayList object</param>
+        /// <param name="context">Azure Default Param -Invocation context, information about your invocation and methods used for logging</param>
         [Function(nameof(DailyBirthdayFunction))]
-        public void Run([TimerTrigger("0 0 4 * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")] BirthdayList birthdayList, FunctionContext context)
+        public void Run([TimerTrigger("0 * * * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")] BirthdayList birthdayList, FunctionContext context)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
@@ -56,7 +56,6 @@ namespace birthday_buddy_functionapp
 
     }
 }
-
 public class MyInfo
 {
     public MyScheduleStatus ScheduleStatus { get; set; }

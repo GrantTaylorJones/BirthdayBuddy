@@ -22,7 +22,7 @@ namespace birthday_buddy_functionapp
             TodaysBirthdays = todaysBirthdays;
         }
 
-        //This is void because SmtpClient.Send() does not return any message or response.
+        // This return type is void because SmtpClient.Send() does not return any message or response
         public void SendBirthdayAlertEmail()
         {
             if (!this.HasValidFields()) throw new ArgumentException($"Empty or null fields in EmailClient.cs: {this.ToString()}");
@@ -49,7 +49,6 @@ namespace birthday_buddy_functionapp
                     smtp.Disconnect(true);
                 }
             }
-        
 
             private Boolean HasValidFields()
             {
