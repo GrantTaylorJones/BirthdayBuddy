@@ -19,11 +19,11 @@ namespace birthday_buddy_functionapp
         public string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append($"Date: {Date}");
             foreach (string person in People)
             {
                 stringBuilder.AppendLine(person);
             }
+            stringBuilder.AppendLine($"\nDate: {Date}");
             return stringBuilder.ToString();
         }
     }

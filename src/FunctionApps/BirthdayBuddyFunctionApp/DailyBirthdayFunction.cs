@@ -33,16 +33,14 @@ namespace birthday_buddy_functionapp
                 Birthday todaysBirthday = BirthdayUtil.GetTodaysBirthdays(birthdayList);
                 if (todaysBirthday.People.Any())
                 {
-                    _logger.LogInformation($"Happy Birthday to {todaysBirthday.ToString()}");
-                    //EmailClient emailClient = new EmailClient(
-                        //Sender Email
-                        //Receipient Email
-                        //Recepient Name
-                        //Sender Password
-                        //List of Birthdays;
-                    // );
-                    //Maybe abstract this procedure to BirthdayService.cs?
-                    //Need to update readme senetence about data store
+                    _logger.LogInformation($"Happy Birthday to \n{todaysBirthday.ToString()}");
+                    EmailClient emailClient = new EmailClient(
+                        Environment.GetEnvironmentVariable("APP_GMAIL_ACCOUNTNAME"),
+                        Environment.GetEnvironmentVariable("APP_GMAIL_PASSWORD"),
+                        Environment.GetEnvironmentVariable("RECEPIENT_GMAIL_ACCOUNTNAME"),
+                        todaysBirthday
+                    );
+                    emailClient.SendBirthdayAlertEmail();
                 }
 
             }

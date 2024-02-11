@@ -1,5 +1,8 @@
 # Birthday Buddy v1.0
 
+
+# TODO: Data Store and refactor to use SMTP.
+
 Birthday Buddy v1.0 is a a service to email me the list of my family and friends' birthdays that fall on the current day. 
 
  > After discussing with some friends, it seems the opinion on the best way to be alerted (if at all) is mixed. The long term goal for 2.0, is a tool that others can use as well. So eventually I'd lke to create customizable alerts for a mobile app that can either email, SMS, or send a push notification.
@@ -22,7 +25,9 @@ Email Service
 
 [Creating azure function app via CLI](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=windows%2Cazure-cli)
 
-[Gmail API Client Library for .NET](https://developers.google.com/api-client-library/dotnet/apis/gmail/v1)
+[Sending Email via SMTP in .NET](https://developers.google.com/api-client-library/dotnet/apis/gmail/v1)
+
+[Microsoft Official SMTP Reference](https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-6.0#:~:text=Important,used%20on%20GitHub)
 
 
 ## SMTP 
@@ -40,3 +45,14 @@ It looks like I can make this simpler and just user an SMTP server to send mail,
 | Gmail | gmail.com | smtp.gmail.com |
 | Outlook | outlook.com | smtp-mail.outlook.com |
 | Yahoo! | mail.yahoo.com | smtp.mail.yahoo.com |
+
+
+
+From Microsoft Docs:
+Important
+We don't recommend that you use the SmtpClient class for new development because SmtpClient doesn't support many modern protocols.
+Use MailKit or other libraries instead. For more information, see SmtpClient shouldn't be used on GitHub.
+https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-6.0#:~:text=Important,used%20on%20GitHub.
+
+
+
