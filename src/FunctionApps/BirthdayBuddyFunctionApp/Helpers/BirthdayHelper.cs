@@ -1,6 +1,6 @@
 namespace birthday_buddy_functionapp
 {
-    public class BirthdayHelper
+    public class BirthdayUtil
     {
         //get todays birthdays
         //send email

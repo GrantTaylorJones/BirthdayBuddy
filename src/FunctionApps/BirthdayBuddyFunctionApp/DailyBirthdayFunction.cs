@@ -34,7 +34,13 @@ namespace birthday_buddy_functionapp
                 Birthday todaysBirthday = GetBirthdays(todaysDate, birthdayList);
                 if (todaysBirthday.People.Count() > 0)
                 {
-                    //sendEmailWithTodaysBirthdayNames(todaysBirthdays.People);
+                    // EmailClient emailClient = new EmailClient(
+                        //Sender Email
+                        //Receipient Email
+                        //Recepient Name
+                        //Sender Password
+                        //List of Birthdays;
+                    // );
                     //Maybe abstract this procedure to BirthdayService.cs?
                     //Need to update readme senetence about data store
                 }

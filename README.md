@@ -23,3 +23,20 @@ Email Service
 [Creating azure function app via CLI](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=windows%2Cazure-cli)
 
 [Gmail API Client Library for .NET](https://developers.google.com/api-client-library/dotnet/apis/gmail/v1)
+
+
+## SMTP 
+
+It looks like I can make this simpler and just user an SMTP server to send mail, since that's all I'm doing.
+
+### Common SMTP server providers and settings
+
+| SMTP Provider | URL | SMTP Settings |
+| ----------- | ----------- | ----------- |
+| AOL | aol.com | smtp.aol.com |
+| AT&T | att.net | smtp.mail.att.net |
+| Comcast | comcast.net | smtp.comcast.net |
+| iCloud | icloud.com/mail | smtp.mail.me.com |
+| Gmail | gmail.com | smtp.gmail.com |
+| Outlook | outlook.com | smtp-mail.outlook.com |
+| Yahoo! | mail.yahoo.com | smtp.mail.yahoo.com |
