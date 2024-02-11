@@ -22,7 +22,7 @@ namespace birthday_buddy_functionapp
         /// <param name="birthdayList"></param>
         /// <param name="context"></param>
         [Function(nameof(DailyBirthdayFunction))]
-        public void Run([TimerTrigger("0 * * * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")] BirthdayList birthdayList, FunctionContext context)
+        public void Run([TimerTrigger("0 0 4 * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")] BirthdayList birthdayList, FunctionContext context)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
