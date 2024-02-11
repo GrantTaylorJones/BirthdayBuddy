@@ -56,10 +56,10 @@ namespace birthday_buddy_functionapp
         private Boolean HasValidFields()
         {
             if (
-                this.SenderEmailAddress == null || this.SenderEmailAddress.Equals("") ||
-                this.RecepientEmailAddress == null || this.RecepientEmailAddress.Equals("") ||
-                this.RecepientName == null || this.RecepientName.Equals("") ||
-                this.SenderPassword == null || this.SenderPassword.Equals("")
+                SenderEmailAddress == null || SenderEmailAddress.Equals("") ||
+                RecepientEmailAddress == null || RecepientEmailAddress.Equals("") ||
+                RecepientName == null || RecepientName.Equals("") ||
+                SenderPassword == null || SenderPassword.Equals("")
             ) return false;
             else return true;
         }

@@ -54,14 +54,7 @@ namespace birthday_buddy_functionapp
             _logger.LogInformation($"Next timer schedule at: {timerInfo.ScheduleStatus.Next}");
         }
 
-        public Birthday GetBirthdays(string dateAsMonthSlashYear, BirthdayList birthdayList)
-        {
-            foreach (Birthday birthday in birthdayList.Birthdays)
-            {
-                if (birthday.Date == dateAsMonthSlashYear) return birthday;
-            }
-            return new Birthday();
-        }
+
 
     }
 }
