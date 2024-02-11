@@ -2,15 +2,17 @@ namespace birthday_buddy_functionapp
 {
     public class BirthdayUtil
     {
-        public BirthdayUtil(){}
-        
-        public static Birthday GetTodaysBirthdays(BirthdayList birthdayList){
-            string todaysDate = GetTodaysDateAsMMYY();
+        public BirthdayUtil() { }
+
+        public static Birthday GetTodaysBirthdays(BirthdayList birthdayList)
+        {
+            string todaysDate = GetTodaysDateAsMMDD();
             return GetBirthdaysOnDate(todaysDate, birthdayList);
         }
 
-        private static string GetTodaysDateAsMMYY(){
-        return DateTime.Now.ToString("MM/dd");
+        private static string GetTodaysDateAsMMDD()
+        {
+            return DateTime.Now.ToString("MM/dd");
         }
 
         public static Birthday GetBirthdaysOnDate(string dateAsMMYY, BirthdayList birthdayList)
@@ -21,6 +23,5 @@ namespace birthday_buddy_functionapp
             }
             return new Birthday();
         }
-
     }
 }

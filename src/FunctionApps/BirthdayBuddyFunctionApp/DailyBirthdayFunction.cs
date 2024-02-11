@@ -22,7 +22,7 @@ namespace birthday_buddy_functionapp
         /// <param name="birthdayList"></param>
         /// <param name="context"></param>
         [Function(nameof(DailyBirthdayFunction))]
-        public void Run([TimerTrigger("0 0 4 * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")] BirthdayList birthdayList, FunctionContext context)
+        public void Run([TimerTrigger("0 * * * * *")] TimerInfo timerInfo, [BlobInput("birthdays/birthdays.json")] BirthdayList birthdayList, FunctionContext context)
         {
             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
@@ -30,11 +30,11 @@ namespace birthday_buddy_functionapp
             {
                 if (birthdayList == null) throw new Exception("birthdayList argument is null (blob input)");
 
-                string todaysDate = DateTime.Now.ToString("MM/dd");
-                Birthday todaysBirthday = GetBirthdays(todaysDate, birthdayList);
-                if (todaysBirthday.People.Count() > 0)
+                Birthday todaysBirthday = BirthdayUtil.GetTodaysBirthdays(birthdayList);
+                if (todaysBirthday.People.Any())
                 {
-                    // EmailClient emailClient = new EmailClient(
+                    _logger.LogInformation($"Happy Birthday to {todaysBirthday.ToString()}");
+                    //EmailClient emailClient = new EmailClient(
                         //Sender Email
                         //Receipient Email
                         //Recepient Name

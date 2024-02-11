@@ -6,14 +6,14 @@ namespace birthday_buddy_functionapp
 {
     public class EmailClient
     {
-
+        
         public string SenderEmailAddress { get; set; }
         public string RecepientEmailAddress { get; set; }
         public string RecepientName { get; set; }
         public string SenderPassword { get; set; }
-        public IEnumerable<String> TodaysBirthdays { get; set; }
+        public Birthday TodaysBirthdays { get; set; }
 
-        public EmailClient(string senderEmailAddress, string recepientEmailAddress, string recepientName, string senderPassword, IEnumerable<string> todaysBirthdays)
+        public EmailClient(string senderEmailAddress, string recepientEmailAddress, string recepientName, string senderPassword, Birthday todaysBirthdays)
         {
             SenderEmailAddress = senderEmailAddress;
             RecepientEmailAddress = recepientEmailAddress;
@@ -22,16 +22,14 @@ namespace birthday_buddy_functionapp
             TodaysBirthdays = todaysBirthdays;
         }
 
-
-
         //This is void because SmtpClient.Send() does not return any message or response.
         public void SendEmail()
         {
             if (!this.HasValidFields()) throw new ArgumentException($"Empty or null fields in EmailClient.cs: {this.ToString()}");
-            MailAddress fromAddress = new MailAddress(this.SenderEmailAddress, "Birthday Buddy");
-            MailAddress toAddress = new MailAddress(this.RecepientEmailAddress, "To Name");
-            const string subject = "Birthday Alert!";
-            const string body = "Happy Birthday: ";
+            MailAddress fromAddress = new(SenderEmailAddress, "Birthday Buddy");
+            MailAddress toAddress = new(RecepientEmailAddress, RecepientName);
+            string subject = "Birthday Alert!";
+            string body = $"Wish a happy birthday to: {TodaysBirthdays.ToString()}";
 
             var smtp = new SmtpClient
             {
