@@ -7,34 +7,26 @@ namespace birthday_buddy_functionapp
     {
 
         public string SenderEmailAddress { get; set; }
-        public string RecepientEmailAddress { get; set; }
         public string SenderPassword { get; set; }
-        public Birthday TodaysBirthdays { get; set; }
 
-        public EmailClient(string senderEmailAddress, string senderPassword, string recepientEmailAddress, Birthday todaysBirthdays)
+        public EmailClient(string senderEmailAddress, string senderPassword)
         {
             SenderEmailAddress = senderEmailAddress;
             SenderPassword = senderPassword;
-            RecepientEmailAddress = recepientEmailAddress;
-            TodaysBirthdays = todaysBirthdays;
+
         }
 
         // This return type is void because SmtpClient.Send() does not return any message or response
-        public void SendBirthdayAlertEmail()
+        public void SendEmail(string recepientEmailAddress, string subject, string body)
         {
-            if (!this.HasValidFields()) throw new ArgumentException($"Empty or null fields in EmailClient.cs: {this.ToString()}");
+            if (!this.HasValidFields(this.SenderEmailAddress, this.SenderPassword, recepientEmailAddress)) throw new ArgumentException($"Empty or null fields in EmailClient.cs: {this.ToString()}");
 
-            MimeMessage email = new MimeMessage();
+            MimeMessage email = ConstructMimeEmail(SenderEmailAddress, recepientEmailAddress, subject, body);
 
-            email.From.Add(new MailboxAddress("Birthday Buddy", SenderEmailAddress));
-            email.To.Add(new MailboxAddress("Birthday Buddy User", RecepientEmailAddress));
+            SendEmail(email);
+        }
 
-            email.Subject = "You have birthdays today!";
-            email.Body = new TextPart("plain")
-            {
-                Text = $"Happy birthday to:\n\n{TodaysBirthdays.ToString()}"
-            };
-
+        private void SendEmail(MimeMessage email){
             using (var smtp = new SmtpClient())
             {
                 smtp.Connect("smtp.gmail.com", 587, false);
@@ -47,12 +39,27 @@ namespace birthday_buddy_functionapp
             }
         }
 
-        private Boolean HasValidFields()
+        private MimeMessage ConstructMimeEmail(string senderEmailAddress, string recepientEmailAddress, string subject, string body){
+            MimeMessage email = new MimeMessage();
+
+            email.From.Add(new MailboxAddress("Birthday Buddy", senderEmailAddress));
+            email.To.Add(new MailboxAddress("Birthday Buddy User", recepientEmailAddress));
+
+            email.Subject = subject;
+            email.Body = new TextPart("plain")
+            {
+                Text = body
+            };
+
+            return email;
+        }
+
+        private Boolean HasValidFields(string senderEmailAddress, string senderPassword, string recepientEmailAddress)
         {
             if (
-                SenderEmailAddress == null || SenderEmailAddress.Equals("") ||
-                RecepientEmailAddress == null || RecepientEmailAddress.Equals("") ||
-                SenderPassword == null || SenderPassword.Equals("")
+                senderEmailAddress == null || senderEmailAddress.Equals("") ||
+                senderPassword == null || senderPassword.Equals("") ||
+                recepientEmailAddress == null || recepientEmailAddress.Equals("")
             ) return false;
             else return true;
         }

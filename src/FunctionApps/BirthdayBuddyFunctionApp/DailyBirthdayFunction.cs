@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
@@ -29,18 +30,25 @@ namespace birthday_buddy_functionapp
             try
             {
                 if (birthdayList == null) throw new Exception("birthdayList argument is null (blob input)");
+                Birthday todaysBirthdays = BirthdayUtil.GetTodaysBirthdays(birthdayList);
 
-                Birthday todaysBirthday = BirthdayUtil.GetTodaysBirthdays(birthdayList);
-                if (todaysBirthday.People.Any())
+                if (todaysBirthdays.People.Any())
                 {
-                    _logger.LogInformation($"Happy Birthday to \n{todaysBirthday.ToString()}");
+                    _logger.LogInformation($"Happy Birthday to \n{todaysBirthdays.ToString()}");
+
                     EmailClient emailClient = new EmailClient(
                         Environment.GetEnvironmentVariable("APP_GMAIL_ACCOUNTNAME"),
-                        Environment.GetEnvironmentVariable("APP_GMAIL_PASSWORD"),
-                        Environment.GetEnvironmentVariable("RECEPIENT_GMAIL_ACCOUNTNAME"),
-                        todaysBirthday
+                        Environment.GetEnvironmentVariable("APP_GMAIL_PASSWORD")
                     );
-                    emailClient.SendBirthdayAlertEmail();
+                    
+                    string subject = "You Have Birthdays Today!";
+                    string body = $"Happy birthday to:\n\n{todaysBirthdays.ToString()}";
+
+                    emailClient.SendEmail(
+                        Environment.GetEnvironmentVariable("RECEPIENT_GMAIL_ACCOUNTNAME"),
+                        subject,
+                        body
+                    );
                 }
 
             }
