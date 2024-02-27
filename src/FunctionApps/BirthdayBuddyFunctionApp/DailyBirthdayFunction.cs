@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
